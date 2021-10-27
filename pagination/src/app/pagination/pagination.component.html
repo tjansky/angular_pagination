@@ -1,0 +1,53 @@
+<div class="pagination">
+    <button type="button" (click)="onSquareClick(currentPage-1)" *ngIf="currentPage > 1">Previuos</button>
+    <div>
+        <!-- <button type="button">1</button> -->
+        <button
+            [ngClass]="{'active-square' : currentPage==s}"
+            *ngFor="let s of firstSquareList"
+            (click)="onSquareClick(s)"
+            type="button"
+        >{{s}}</button>
+    </div>
+    <div *ngIf="leftDots">---</div>
+    <div>
+        <!-- <button type="button">7</button>
+        <button type="button">8</button>
+        <button type="button">9</button> -->
+        <button
+            [ngClass]="{'active-square' : currentPage==s}"
+            *ngFor="let s of middleSquareList"
+            (click)="onSquareClick(s)"
+            type="button"
+            >{{s}}</button>
+    </div>
+    <div *ngIf="rightDots">---</div>
+    <div>
+        <!-- <button type="button">108</button> -->
+        <button 
+            [ngClass]="{'active-square' : currentPage==s}"
+            *ngFor="let s of lastSquareList"
+            (click)="onSquareClick(s)"
+            type="button"
+        >{{s}}</button>
+    </div>
+    <button type="button" (click)="onSquareClick(currentPage+1)" *ngIf="currentPage < totalCount">Next</button>
+</div>
+
+<br>
+<br>
+<button (click)="onSquareClick(1)" type="button">1</button>
+<button (click)="onSquareClick(2)" type="button">2</button>
+<button (click)="onSquareClick(19)" type="button">19</button>
+<button (click)="onSquareClick(20)" type="button">20</button>
+<button (click)="onSquareClick(105)" type="button">105</button>
+<button (click)="onSquareClick(106)" type="button">106</button>
+<button (click)="onSquareClick(107)" type="button">107</button>
+<button (click)="onSquareClick(108)" type="button">108</button>
+
+     <!--
+        CurrentPage
+        TotalPages
+        PageSize
+        TotalCount 
+    -->
