@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -7,29 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  currentPage: number = 1;
-  totalPages: number = 11;
-  pageSize: number = 10;
-  totalCount: number = 108;
+  @Output() newSquareClicked = new EventEmitter<{pageNum: number, pageSize: number}>();
+
+  @Input() currentPage: number = 1;
+  @Input() totalPages: number = 11;
+  @Input() pageSize: number = 10;
+  @Input() totalCount: number = 108;
 
   firstSquareList: number[] = [];
   middleSquareList: number[] = [];
   lastSquareList: number[] = [];
 
-  leftDots = true;
-  rightDots = false;
+  leftDots: boolean;
+  rightDots: boolean;
+
 
   // how many squares on start and end before it starts to include middle squares
-  startEndCount = 4;
+  @Input() startEndCount = 4;
 
   constructor() { }
 
 
   ngOnInit(): void {
-    this.onSquareClick(1);
+    this.onSquareClick(this.currentPage, true);
   }
 
-  onSquareClick(squareNumber: number) {
+  onSquareClick(squareNumber: number, isInitial = false) {
     this.currentPage = squareNumber;
     this.firstSquareList = [];
     this.middleSquareList = [];
@@ -71,6 +74,12 @@ export class PaginationComponent implements OnInit {
       this.rightDots = true;
       this.middleSquareList = [squareNumber-1, squareNumber, squareNumber+1];
     }
+
+    // notice parent that new square was clicked
+    if (!isInitial) {
+      this.newSquareClicked.emit({pageNum: squareNumber, pageSize: this.pageSize});
+    }
+    
 
   }
 
