@@ -10,7 +10,7 @@ export class PaginationComponent implements OnInit {
   @Output() newSquareClicked = new EventEmitter<{pageNum: number, pageSize: number}>();
 
   @Input() currentPage: number = 1;
-  @Input() totalPages: number = 11;
+  //@Input() totalPages: number = 11;
   @Input() pageSize: number = 10;
   @Input() totalCount: number = 10;
 
@@ -54,7 +54,9 @@ export class PaginationComponent implements OnInit {
         this.firstSquareList.push(i);
         i++;
       }
-    } else { // if list isnt short
+    } else { 
+      // if list isnt short than there is more lists of squares:
+
       // if current page is less than startCount show first squares
       if (isAtStart) {
         this.leftDots = true;

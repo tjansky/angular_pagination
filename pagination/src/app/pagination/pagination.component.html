@@ -1,6 +1,6 @@
 <div class="pagination">
 
-    <button type="button" class="square" (click)="onSquareClick(currentPage-1)" *ngIf="currentPage > 1">Previuos</button>
+    <button type="button" class="square" (click)="onSquareClick(currentPage-1)" [disabled]="currentPage <= 1">Previuos</button>
 
     <div class="square-container">
         <button
@@ -36,5 +36,5 @@
         >{{s}}</button>
     </div>
 
-    <button type="button" class="square" (click)="onSquareClick(currentPage+1)" *ngIf="currentPage < totalCount">Next</button>
+    <button type="button" class="square" (click)="onSquareClick(currentPage+1)" [disabled]="currentPage >= totalCount">Next</button>
 </div>
